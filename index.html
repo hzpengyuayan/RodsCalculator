@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>咸鱼之王-宝箱计算器</title>
+    <!--引入react核心库-->
+    <script
+      crossorigin
+      src="https://unpkg.com/react@17/umd/react.development.js"
+    ></script>
+    <!--引入react扩展库，用于支持react操作dom-->
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+    ></script>
+    <!--引入babel，用于将jsx转成js-->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="./index.js"></script>
+  </head>
+
+  <body>
+    <div id="app"></div>
+  </body>
+</html>
+<script type="text/babel">
+  const titles = ["普通箱子", "青铜箱子", "黄金箱子", "铂金箱子"];
+  const BoxsInfo = [
+    {
+      title: "普通箱子",
+      rate: 1,
+      num: 0,
+    },
+    {
+      title: "青铜箱子",
+      rate: 10,
+      num: 0,
+    },
+    {
+      title: "黄金箱子",
+      rate: 20,
+      num: 0,
+    },
+    {
+      title: "铂金箱子",
+      rate: 50,
+      num: 0,
+    },
+  ];
+  const App = () => {
+    const [boxsNum, setboxsNum] = React.useState([new Array(4).fill(0)]);
+    const [boxsInfo, setBoxsInfo] = React.useState(BoxsInfo);
+    const changeCurBoxNum = (index, rate, e) => {
+      let newBoxsInfo = boxsInfo.slice();
+      newBoxsInfo[index].num = Number(e.target.value) * rate;
+      setBoxsInfo(newBoxsInfo);
+    };
+    return (
+      <div>
+        <div>
+          {boxsInfo.map((item, index) => {
+            return (
+              <div key={item.title}>
+                <label htmlFor="boxIpt">
+                  {item.title}
+                  <input
+                    type="number"
+                    name="boxIpt"
+                    onChange={(e) => changeCurBoxNum(index, item.rate, e)}
+                  />
+                  (注意:只能输入数字)
+                </label>
+              </div>
+            );
+          })}
+        </div>
+        <div>最终积分{calc(boxsInfo.map((item) => item.num))}</div>
+        <div>
+          最终轮数 {calc(boxsInfo.map((item) => item.num))} / 3500 = {(calc(boxsInfo.map((item) => item.num)) / 3500).toFixed(2)}  轮
+        </div>
+      </div>
+    );
+  };
+
+  ReactDOM.render(<App />, document.getElementById("app"));
+</script>
