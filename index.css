@@ -1,0 +1,35 @@
+.index {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.title {
+  text-align: left;
+}
+.title::before {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 15px;
+  margin-right: 5px;
+  background-color: #1989fa;
+}
+.warn {
+  font-weight: bold;
+  color: #fd1b1b;
+}
+.ipts-content {
+  display: flex;
+}
+.ipts-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+.score-sum,
+.rounds-num {
+  text-align: right;
+  font-weight: bold;
+}

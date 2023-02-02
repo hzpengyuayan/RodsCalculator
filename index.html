@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>咸鱼之王-宝箱计算器</title>
+    <link rel="stylesheet" href="./index.css" />
     <!--引入react核心库-->
     <script
       crossorigin
@@ -52,32 +53,50 @@
     const [boxsNum, setboxsNum] = React.useState([new Array(4).fill(0)]);
     const [boxsInfo, setBoxsInfo] = React.useState(BoxsInfo);
     const changeCurBoxNum = (index, rate, e) => {
+      let val = Number(e.target.value);
+      if (val < 0) return alert("无法输入负数");
       let newBoxsInfo = boxsInfo.slice();
-      newBoxsInfo[index].num = Number(e.target.value) * rate;
+      newBoxsInfo[index].num = val * rate;
       setBoxsInfo(newBoxsInfo);
     };
     return (
-      <div>
-        <div>
-          {boxsInfo.map((item, index) => {
-            return (
-              <div key={item.title}>
-                <label htmlFor="boxIpt">
-                  {item.title}
-                  <input
-                    type="number"
-                    name="boxIpt"
-                    onChange={(e) => changeCurBoxNum(index, item.rate, e)}
-                  />
-                  (注意:只能输入数字)
-                </label>
-              </div>
-            );
-          })}
-        </div>
-        <div>最终积分{calc(boxsInfo.map((item) => item.num))}</div>
-        <div>
-          最终轮数 {calc(boxsInfo.map((item) => item.num))} / 3500 = {(calc(boxsInfo.map((item) => item.num)) / 3500).toFixed(2)}  轮
+      <div class="index">
+        <h1>咸鱼之王-宝箱计算器</h1>
+        <div class="index-content">
+          <div class="ipts">
+            <div class="title">
+              依次输入宝箱数量
+              <span class='warn'>(注意:只能输入数字)</span>
+            </div>
+            <div>
+              {boxsInfo.map((item, index) => {
+                return (
+                  <div key={item.title} class="ipts-row">
+                    <label htmlFor="boxIpt">{item.title}</label>
+                    <input
+                      type="number"
+                      name="boxIpt"
+                      value={item.num / item.rate}
+                      onChange={(e) => changeCurBoxNum(index, item.rate, e)}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div class="score">
+            <div class="title">最终积分</div>
+            <div class="score-sum">
+              {calc(boxsInfo.map((item) => item.num))}
+            </div>
+          </div>
+          <div class="rounds">
+            <div class="title">最终轮数</div>
+            <div class="rounds-num">
+              {calc(boxsInfo.map((item) => item.num))} / 3500 ={" "}
+              {(calc(boxsInfo.map((item) => item.num)) / 3500).toFixed(2)} 轮
+            </div>
+          </div>
         </div>
       </div>
     );
