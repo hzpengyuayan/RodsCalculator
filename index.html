@@ -1,10 +1,10 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>咸鱼之王-宝箱计算器</title>
+    <title>2024年咸鱼之王-端午鱼竿计算器</title>
     <link rel="stylesheet" href="./index.css" />
     <!--引入react核心库-->
     <script
@@ -26,75 +26,69 @@
   </body>
 </html>
 <script type="text/babel">
-  const titles = ["普通箱子", "青铜箱子", "黄金箱子", "铂金箱子"];
-  const BoxsInfo = [
-    {
-      title: "普通箱子",
-      rate: 1,
-      num: 0,
-    },
-    {
-      title: "青铜箱子",
-      rate: 10,
-      num: 0,
-    },
-    {
-      title: "黄金箱子",
-      rate: 20,
-      num: 0,
-    },
-    {
-      title: "铂金箱子",
-      rate: 50,
-      num: 0,
-    },
-  ];
+  
   const App = () => {
-    const [boxsNum, setboxsNum] = React.useState([new Array(4).fill(0)]);
-    const [boxsInfo, setBoxsInfo] = React.useState(BoxsInfo);
-    const changeCurBoxNum = (index, rate, e) => {
-      let val = Number(e.target.value);
-      if (val < 0) return alert("无法输入负数");
-      let newBoxsInfo = boxsInfo.slice();
-      newBoxsInfo[index].num = val * rate;
-      setBoxsInfo(newBoxsInfo);
+    const [level, setLevel] = React.useState(2);
+    const [gold, setGold] = React.useState(500000);
+    const [rod, setRod] = React.useState(1750);
+
+    const changeLevel = (e) => {
+      setLevel(e.target.value);
     };
+
+    const changeGold = (e) => {
+      setGold(e.target.value);
+    };
+
+    const changeRod = (e) => {
+      setRod(e.target.value);
+    };
+
     return (
       <div class="index">
-        <h1>咸鱼之王-宝箱计算器</h1>
+        
         <div class="index-content">
           <div class="ipts">
-            <div class="title">
-              依次输入宝箱数量
-              <span class='warn'>(注意:只能输入数字)</span>
-            </div>
-            <div>
-              {boxsInfo.map((item, index) => {
-                return (
-                  <div key={item.title} class="ipts-row">
-                    <label htmlFor="boxIpt">{item.title}</label>
-                    <input
-                      type="number"
-                      name="boxIpt"
-                      value={item.num / item.rate}
-                      onChange={(e) => changeCurBoxNum(index, item.rate, e)}
-                    />
-                  </div>
-                );
-              })}
-            </div>
+            <label htmlFor="boxIpt">入场金砖 </label>
+            推荐22w
+          </div>
+          
+          <div class="ipts">
+            <label htmlFor="boxIpt">黑市刷新次数</label>
+            <select name="boxIpt" onChange={changeLevel}>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
           </div>
           <div class="score">
-            <div class="title">最终积分</div>
-            <div class="score-sum">
-              {calc(boxsInfo.map((item) => item.num))}
-            </div>
+            <label htmlFor="target_gold">目标金砖</label>
+            <select name="target_gold" onChange={changeGold}>
+              <option value="500000">50w</option>
+              <option value="460000">46w</option>
+              <option value="420000">42w</option>
+              <option value="380000">38w</option>
+            </select>
+          </div>
+          <div class="score">
+            <label htmlFor="target_rod">目标鱼竿</label>
+            <select name="target_rod" onChange={changeRod}>
+              <option value="1750">1750</option>
+              <option value="1600">1600</option>
+              <option value="1450">1450</option>
+              <option value="1300">1300</option>
+            </select>
           </div>
           <div class="rounds">
-            <div class="title">最终轮数</div>
+            <div class="title">最终鱼竿</div>
             <div class="rounds-num">
-              {calc(boxsInfo.map((item) => item.num))} / 3500 ={" "}
-              {(calc(boxsInfo.map((item) => item.num)) / 3500).toFixed(2)} 轮
+              {calcRods(rod - 0, level - 0, gold - 0).toFixed(0)}
             </div>
           </div>
         </div>
@@ -103,17 +97,4 @@
   };
 
   ReactDOM.render(<App />, document.getElementById("app"));
-</script> -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>扫描结果</title>
-</head>
-<body>
-    <p>
-        11100000000013338W009^113325260026606519^1.2.156.3005.2.11100000000013338W009.113325260026606519.2022031701.001.R^3311222309060101^缙云县千年古城共同富裕项目（核心区）^缙云县城市建设投资有限公司^3311222309060101^91331122MA2A1M3P9Y
-    </p>
- </body>
-</html>
+</script>
