@@ -1,7 +1,7 @@
 # 介绍
 
-咸鱼之王-宝箱计算器，快速计算宝箱周可完成轮数。
+2024年咸鱼之王-端午鱼竿计算器，快速计算所需鱼竿数。
 
 ## 预览网站
 
-https://hzpengyuayan.github.io/BoxCalculator/
+https://hzpengyuayan.github.io/RodsCalculator/
